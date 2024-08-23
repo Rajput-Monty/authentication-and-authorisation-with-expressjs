@@ -4,6 +4,64 @@
 
 The challenge involved enhancing a user management system with a new feature: user deletion. The goal was to implement a secure deletion mechanism that allows authenticated users to delete other users from the system. This feature needed to be accessible via a web interface and should only be performed by users with proper authorization.
 
+## Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+- **Node.js**
+- **npm**: Node Package Manager (comes with Node.js)
+- **Database**: SQLite 3 
+- **Environment Variables**: Create an `.env` file in back-end folder
+
+## Setup and Installation
+
+1. **Clone the Repository**
+
+    First, clone the repository to your local machine using Git:
+
+    ```bash
+    git clone https://github.com/Rajput-Monty/authentication-and-authorisation-with-expressjs.git
+    ```
+
+2. **Navigate to the Project Directory**
+
+    Change directory to the project folder:
+
+    ```bash
+    cd authentication-and-authorisation-with-expressjs
+    ```
+
+3. **Install Dependencies**
+
+    Install the required Node.js packages using npm:
+
+    ```bash
+    npm install bcryptjs body-parser cookie-parser cors dotenv express jsonwebtoken morgan sequelize sqlite3
+    ```
+
+4. **Setup Environment Variables**
+
+    Create a `.env` file in the back-end directory and add the necessary environment variables. Example:
+
+    ```
+    TOKEN_KEY = "StackUpAuthenticationProject123!";
+    PORT = 4001;
+    ```
+
+5. **Start the Application**
+
+    Start the server using node (ensure your current working directory is back-end)
+
+    ```bash
+    node app.js
+    ```
+
+    By default, the server will be accessible at `http://localhost:4001`.
+
+   if you are using cloud development you need to change the default localhost link `http://localhost:4001` with your generated link( got after running node app.js)
+
+   Run both front-end (live server) and back-end (node app.js) and make sure both server are public 
+
 ## Key Features Implemented
 
 ### Delete User Functionality
