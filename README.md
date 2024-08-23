@@ -110,55 +110,96 @@ Before running the application, ensure you have the following installed:
 
 - **User Interface**:
 
-    Created a new HTML file (`delete-user.html`) for the user deletion form. This form allows admins to input a username to delete. The design is kept minimal to focus on functionality.
+    Created a new HTML file `web-front-end/pages/admin/delete-user.html` for the user deletion form. This form allows admins to input a username to delete. The design is kept minimal to focus on functionality.
 
     ```html
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Delete User</title>
-        <link rel="stylesheet" href="../styles/styles.css">
-    </head>
-    <body>
-        <h1>Delete User</h1>
-        <form id="delete-user-form">
-            <label for="other-username">Username:</label>
-            <input type="text" id="other-username" name="username" required>
-            <br>
-            <button type="submit">Delete User</button>
-        </form>
+   <!DOCTYPE html>
+   <html lang="en">
 
-        <script>
-            document.getElementById("delete-user-form").addEventListener("submit", async (event) => {
-                event.preventDefault();
-                const username = document.getElementById("other-username").value;
-                const response = await fetch(`http://localhost:4001/auth/delete/user`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+   </head>
+
+   <body>
+    <h1>Delete User</h1>
+    <form id="delete-user-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <button type="submit">Delete User</button>
+    </form>
+
+    <script>
+
+        document.getElementById('delete-user-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+
+            try {
+                const response = await fetch('https://fluffy-space-broccoli-967999xvq939rj5-4001.app.github.dev/auth/delete/user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username }),
                     credentials: "include"
                 });
 
                 const result = await response.json();
+
                 if (result.ok) {
-                    alert('User deleted successfully');
-                    window.location.href = './dashboard.html';
+                    displayMessage('User deleted successfully', 'success');
+                    window.location.href = './dashboard.html'; // Redirect after successful deletion
                 } else {
-                    alert('User deletion failed! Please check the username.');
+                    displayMessage(`User deletion failed! ${result.message}`, 'error');
                 }
-            });
-        </script>
+            } catch (error) {
+                displayMessage(`An error occurred: ${error.message}`, 'error');
+            }
+        });
+
+        /**
+         * Displays a message on the page with appropriate styling based on the message type.
+         * @param {string} message - The message to display.
+         * @param {string} type - The type of message ('success' or 'error').
+         */
+        function displayMessage(message, type) {
+            const messageContainer = document.createElement('div');
+            messageContainer.textContent = message;
+            messageContainer.className = type === 'success' ? 'message-success' : 'message-error';
+            document.body.appendChild(messageContainer);
+
+            setTimeout(() => {
+                messageContainer.remove();
+            }, 3500);
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        if (username) {
+            document.getElementById('username').value = username;
+        } else {
+            alert('Username not provided');
+            window.location.href = './dashboard.html';
+        }
+    </script>
     </body>
+
     </html>
     ```
 
 - **JavaScript Integration**:
 
     The JavaScript code listens for the form submission, sends a POST request to the backend with the username to be deleted, and handles the response by notifying the user and redirecting them to the dashboard.
+
+
+- **Css Style Integration**:
+
+   In addition to implementing the user deletion functionality, we have also added CSS styling to enhance the visual presentation of the web pages. The styles 
+   ensure that forms and buttons are centered and visually appealing, improving user experience. The CSS is included in the `styles/styles.css` file and is 
+   applied across the relevant HTML pages, including the new delete user page.
+
 
 ## Implementation Notes
 
