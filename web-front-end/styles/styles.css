@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Center the button and style it */
+#delete-user-button {
+    display: block;
+    width: 355px; /* Adjust width as needed */
+    margin: 20px auto; /* Centers the button horizontally and adds vertical margin */
+    padding: 10px; /* Adds padding inside the button */
+    background-color: #d9534f; /* Red background color */
+    color: #fff; /* White text color */
+    border: none; /* Removes default border */
+    border-radius: 5px; /* Rounds the corners of the button */
+    font-size: 16px; /* Increases the font size */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    text-align: center; /* Centers text inside the button */
+    transition: background-color 0.3s ease; /* Adds a smooth transition effect for background color */
+}
+
+#delete-user-button:hover {
+    background-color: #c9302c; /* Darker red when hovered */
+}
+
+/* Styles for success and error messages */
+.message-success {
+    color: green;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.message-error {
+    color: red;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+* {
+    box-sizing: border-box;
+}
