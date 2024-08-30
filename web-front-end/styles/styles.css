@@ -102,7 +102,7 @@ button:hover {
     width: 355px; /* Adjust width as needed */
     margin: 20px auto; /* Centers the button horizontally and adds vertical margin */
     padding: 10px; /* Adds padding inside the button */
-    background-color: #d9534f; /* Red background color */
+    background-color: red; /* Red background color */
     color: #fff; /* White text color */
     border: none; /* Removes default border */
     border-radius: 5px; /* Rounds the corners of the button */

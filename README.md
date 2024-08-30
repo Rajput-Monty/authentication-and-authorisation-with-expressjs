@@ -2,7 +2,7 @@
 
 ## Challenge Overview
 
-The challenge involved enhancing a user management system with a new feature: user deletion. The goal was to implement a secure deletion mechanism that allows authenticated users to delete other users from the system. This feature needed to be accessible via a web interface and should only be performed by users with proper authorization.
+The challenge involved with a new feature: user deletion. The goal was to implement a deletion mechanism that allows authenticated users and admins to delete other users and themselves from the system.
 
 ## Prerequisites
 
@@ -28,7 +28,8 @@ Before running the application, ensure you have the following installed:
     Change directory to the project folder:
 
     ```bash
-    cd authentication-and-authorisation-with-expressjs
+    cd authentication-and-authorisation-with-expressjs 
+    cd back-end 
     ```
 
 3. **Install Dependencies**
@@ -93,101 +94,24 @@ Before running the application, ensure you have the following installed:
 
 - **Routes Setup**:
 
-    The `authHandling.js` file was updated to include a new route for user deletion. This route uses middleware to ensure that only authenticated and authorized users (admins) can access it.
+    The `authHandling.js` file was updated to include a new route for user deletion. This route uses middleware to ensure that only authenticated users or admin can access it.
 
     ```javascript
     router.post(
         "/delete/user",
         authentication,
-        authorisation({ isAdmin: true }),
+        authorisation({ isAdmin: false}),
         (req, res) => authController.delete_user_by_username(req, res)
     );
     ```
 
-    Here, `authentication` middleware ensures that the user is logged in, and `authorisation({ isAdmin: true })` ensures that only users with admin privileges can perform deletions.
 
-### Frontend Interaction
+### Implementation Notes
 
 - **User Interface**:
 
-    Created a new HTML file `web-front-end/pages/admin/delete-user.html` for the user deletion form. This form allows admins to input a username to delete. The design is kept minimal to focus on functionality.
+    Created a new HTML file `web-front-end/pages/admin/delete-user.html` for the user deletion form. This form allows us to input a username to delete. The design is kept minimal to focus on functionality.
 
-    ```html
-   <!DOCTYPE html>
-   <html lang="en">
-
-   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete User</title>
-    <link rel="stylesheet" href="../../styles/styles.css">
-   </head>
-
-   <body>
-    <h1>Delete User</h1>
-    <form id="delete-user-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <button type="submit">Delete User</button>
-    </form>
-
-    <script>
-
-        document.getElementById('delete-user-form').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-
-            try {
-                const response = await fetch('https://fluffy-space-broccoli-967999xvq939rj5-4001.app.github.dev/auth/delete/user', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username }),
-                    credentials: "include"
-                });
-
-                const result = await response.json();
-
-                if (result.ok) {
-                    displayMessage('User deleted successfully', 'success');
-                    window.location.href = './dashboard.html'; // Redirect after successful deletion
-                } else {
-                    displayMessage(`User deletion failed! ${result.message}`, 'error');
-                }
-            } catch (error) {
-                displayMessage(`An error occurred: ${error.message}`, 'error');
-            }
-        });
-
-        /**
-         * Displays a message on the page with appropriate styling based on the message type.
-         * @param {string} message - The message to display.
-         * @param {string} type - The type of message ('success' or 'error').
-         */
-        function displayMessage(message, type) {
-            const messageContainer = document.createElement('div');
-            messageContainer.textContent = message;
-            messageContainer.className = type === 'success' ? 'message-success' : 'message-error';
-            document.body.appendChild(messageContainer);
-
-            setTimeout(() => {
-                messageContainer.remove();
-            }, 3500);
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('username');
-        if (username) {
-            document.getElementById('username').value = username;
-        } else {
-            alert('Username not provided');
-            window.location.href = './dashboard.html';
-        }
-    </script>
-    </body>
-
-    </html>
-    ```
 
 - **JavaScript Integration**:
 
@@ -200,12 +124,6 @@ Before running the application, ensure you have the following installed:
    ensure that forms and buttons are centered and visually appealing, improving user experience. The CSS is included in the `styles/styles.css` file and is 
    applied across the relevant HTML pages, including the new delete user page.
 
-
-## Implementation Notes
-
-- **Authentication and Authorization**:
-
-    The delete functionality is protected by authentication to ensure that only logged-in users can access it. Additionally, authorization is implemented to ensure that only users with admin rights can delete other users. This prevents unauthorized users from performing destructive actions.
 
 - **Frontend Simplicity**:
 

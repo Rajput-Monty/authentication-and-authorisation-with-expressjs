@@ -9,22 +9,23 @@
 </head>
 
 <body>
-    <h1>Delete User</h1>
-    <form id="delete-user-form">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <button type="submit">Delete User</button>
-    </form>
+    <section id="delete-user-section">
+        <form id="delete-user-form">
+            <label for="username">Username:</label>
+            <input type="text" id="delete-username" name="username" placeholder="Enter Username to delete" required>
+            <button type="submit" style="background-color: red;">Delete User</button>
+        </form>
+        <div id="delete-response-message"></div>
+    </section>
 
     <script>
 
         document.getElementById('delete-user-form').addEventListener('submit', async function (event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
+            const username = document.getElementById('delete-username').value;
 
             try {
-                const response = await fetch('https://fluffy-space-broccoli-967999xvq939rj5-4001.app.github.dev/auth/delete/user', {
+                const response = await fetch('http://localhost:4001/auth/delete/user', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username }),
@@ -35,7 +36,6 @@
 
                 if (result.ok) {
                     displayMessage('User deleted successfully', 'success');
-                    window.location.href = './dashboard.html'; // Redirect after successful deletion
                 } else {
                     displayMessage(`User deletion failed! ${result.message}`, 'error');
                 }
