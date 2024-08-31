@@ -100,7 +100,6 @@ Before running the application, ensure you have the following installed:
     router.post(
         "/delete/user",
         authentication,
-        authorisation({ isAdmin: false}),
         (req, res) => authController.delete_user_by_username(req, res)
     );
     ```

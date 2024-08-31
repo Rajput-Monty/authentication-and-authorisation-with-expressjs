@@ -34,7 +34,7 @@
 
 <script>
         async function loadUserProfile() {
-            const response = await fetch('http://localhost:4001/auth/user',{
+            const response = await fetch('https://crispy-goggles-97xr99w9454hp557-4001.app.github.dev/auth/user',{
                 credentials:"include"
             });
             const user = (await response.json())?.payload;
@@ -53,7 +53,7 @@
             const username = document.getElementById('username').value;
             const contact_number = document.getElementById('contact_number').value;
             const email = document.getElementById('email').value;
-            const response = await fetch('http://localhost:4001/auth/user', {
+            const response = await fetch('https://crispy-goggles-97xr99w9454hp557-4001.app.github.dev/auth/user', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, contact_number }),
@@ -76,7 +76,7 @@
             const username = document.getElementById('delete-username').value;
 
             try {
-                const response = await fetch('http://localhost:4001/auth/delete/user', {
+                const response = await fetch('https://crispy-goggles-97xr99w9454hp557-4001.app.github.dev/auth/delete/user', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username }),

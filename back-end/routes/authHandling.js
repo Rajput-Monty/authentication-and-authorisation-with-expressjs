@@ -46,7 +46,6 @@ router.put('/user',
 // Requires user to be authenticated and authorized as an admin
 router.post('/delete/user', 
     authentication, 
-    authorisation({ isAdmin: false }),
     (req, res) => {
         authController.delete_user_by_username(req, res);
     }
